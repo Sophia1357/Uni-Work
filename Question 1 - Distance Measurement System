@@ -1,0 +1,39 @@
+// Pins
+const int trigPin = 9;
+const int echoPin = 10;
+
+// Variables
+long duration;
+int distance;
+int distanceInches;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  
+  // Sending a 10 microsecond long pulse
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  // duration = how long until the feedback signal appears
+  duration = pulseIn(echoPin, HIGH);
+  
+  // Calculating the distance from time the signal was travelling
+  // Multiply by 0.0343 due to the speed of sound
+  // Divide by two since the signal travels twice the distance (one there, one back)
+  distance = duration * 0.0343 / 2;
+  
+  // Printing results
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println("cm");
+  
+  delay(100);
+}
