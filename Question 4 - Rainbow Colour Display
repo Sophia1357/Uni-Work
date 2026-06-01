@@ -18,7 +18,7 @@ void rainbow(uint8_t wait) {
   uint16_t i, j;
   for(j=0; j<256; j++) {
     for(i=0; i<pixels.numPixels(); i++) {
-      pixels.setPixelColor(i, Wheel((i+j) & 255));
+      pixels.setPixelColour(i, Wheel((i+j) & 255));
     }
     pixels.show();
     delay(wait);
@@ -29,13 +29,13 @@ void rainbow(uint8_t wait) {
 uint32_t Wheel(byte WheelPos) {
   WheelPos = 255 - WheelPos;
   if(WheelPos < 85) {
-    return pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3); // multiplied by 3 as the range is 0-84 whilst the LEDs have a range of 0-255
+    return pixels.Colour(255 - WheelPos * 3, 0, WheelPos * 3); // multiplied by 3 as the range is 0-84 whilst the LEDs have a range of 0-255
   } // as WheelPos increases, red decreases in intensity whilst blue increases in intensity. Green is off
   
   if(WheelPos < 170) {
     WheelPos -= 85;
-    return pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+    return pixels.Colour(0, WheelPos * 3, 255 - WheelPos * 3);
   } // as WheelPos increases, green increases in intensity and blue decreases in intensity. Red is off
   WheelPos -= 170;
-  return pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+  return pixels.Colour(WheelPos * 3, 255 - WheelPos * 3, 0);
 } // as WheelPos increases, red increases in intensity whilst green decreases in intensity. Blue stays off
